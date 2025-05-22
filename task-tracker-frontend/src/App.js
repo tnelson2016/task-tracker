@@ -8,7 +8,8 @@ function App() {
   // Fetch tasks from the backend
   const fetchTasks = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/tasks');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks`)
+      ;
       const data = await response.json();
       setTasks(data);
     } catch (error) {
@@ -28,7 +29,7 @@ fetchTasks();
   // ------Toggle task completion status
   const handleToggleTask = async (taskId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/tasks/${taskId}/toggle`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}/toggle`, {
         method: "PUT",
       });
 
@@ -50,9 +51,10 @@ fetchTasks();
   //----Delete a task
   const handleDeleteTask = async (taskId) =>{
     try {
-      const response = await fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, {
         method: "DELETE",
       });
+      
 
       if(!response.ok) throw new Error("Failed to Delete Task");
 
